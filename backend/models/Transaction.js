@@ -6,12 +6,23 @@ const TransactionSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    amount: { type: Number, required: true },
-    date: { type: Date, default: Date.now },
-    category: { type: String, required: true },
-    type: { type: String, enum: ['income', 'expense'], required: true },
-    description: { type: String },
+    amount: {
+        type: Number,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    type: {
+        type: String,
+        enum: ['income', 'expense'],
+        required: true,
+    },
 });
 
-const Transaction = mongoose.model('Transaction', TransactionSchema);
-module.exports = Transaction;
+module.exports = mongoose.model('Transaction', TransactionSchema);
