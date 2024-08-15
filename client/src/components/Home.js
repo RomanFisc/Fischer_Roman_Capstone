@@ -1,49 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TaskList from './TaskList'; 
 
 const Home = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const fetchTasks = async () => {
       try {
-        const response = await axios.get('/api/auth/status');
-        setIsLoggedIn(response.data.isLoggedIn);
+        const response = await axios.get('/api/tasks', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        setTasks(response.data);
       } catch (error) {
-        console.error('Error checking auth status:', error);
+        setError('Error fetching tasks');
+        console.error('Error fetching tasks:', error);
       }
     };
 
-    checkAuth();
+    fetchTasks();
   }, []);
-
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get('/api/tasks');
-      setTasks(response.data);
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchTasks();
-    }
-  }, [isLoggedIn]);
 
   return (
     <div>
-      {isLoggedIn ? (
-        <div>
-          <h1>Task Management</h1>
-          <TaskList tasks={tasks} />
-        </div>
-      ) : (
-        <h1>Please log in to manage your tasks</h1>
-      )}
+      <h1>Tasks</h1>
+      {error && <p>{error}</p>}
+      <ul>
+        {tasks.map(task => (
+          <li key={task._id}>{task.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
