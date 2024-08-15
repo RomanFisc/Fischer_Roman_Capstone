@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await axios.get('/api/tasks');
-        setTasks(response.data);
-      } catch (error) {
-        console.error('Error fetching tasks:', error);
-      }
-    };
-    fetchTasks();
-  }, []);
-
+const TaskList = ({ tasks }) => {
   return (
     <ul>
-      {tasks.map((task) => (
-        <li key={task._id}>{task.title}</li>
+      {tasks.map(task => (
+        <li key={task.id}>{task.name}</li>
       ))}
     </ul>
   );
