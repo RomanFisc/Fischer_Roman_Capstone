@@ -3,7 +3,6 @@ import AuthForm from '../components/AuthForm';
 
 const Register = () => {
   const handleAuthSuccess = (data) => {
-    // Handle registration success (e.g., store token, redirect, etc.)
     console.log('Registration successful:', data);
   };
 

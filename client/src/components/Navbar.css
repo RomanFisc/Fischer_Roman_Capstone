@@ -2,52 +2,52 @@
   background-color: #333;
   padding: 1rem;
   display: flex;
-  justify-content: center; /* Center the items horizontally */
-  align-items: center; /* Center the items vertically */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  justify-content: center; 
+  align-items: center; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .navbar-links {
-  list-style: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-  display: flex; /* Display links in a row */
+  list-style: none;
+  padding: 0; 
+  margin: 0; 
+  display: flex; 
 }
 
 .navbar-links li {
-  margin: 0 0.5rem; /* Space between links */
+  margin: 0 0.5rem; 
 }
 
 .navbar-links a {
   color: #fff;
   text-decoration: none;
-  padding: 0.75rem 1.5rem; /* Space around the text */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
-  font-weight: bold; /* Bold text */
+  padding: 0.75rem 1.5rem; 
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  font-weight: bold; 
 }
 
 .navbar-links a:hover {
-  background-color: #575757; /* Background color on hover */
-  color: #fff; /* Text color on hover */
-  border-radius: 5px; /* Rounded corners on hover */
+  background-color: #575757; 
+  color: #fff; 
+  border-radius: 5px;
 }
 
 .navbar-links a.active {
-  background-color: #007bff; /* Highlight the active link */
-  color: #fff; /* Text color for active link */
-  border-radius: 5px; /* Rounded corners for active link */
+  background-color: #007bff;
+  color: #fff; 
+  border-radius: 5px; 
 }
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column; /* Stack navbar items vertically on smaller screens */
+    flex-direction: column; 
   }
 
   .navbar-links {
-    flex-direction: column; /* Stack links vertically */
+    flex-direction: column; 
   }
 
   .navbar-links li {
-    margin: 0.5rem 0; /* Space between links */
+    margin: 0.5rem 0; 
   }
 }
