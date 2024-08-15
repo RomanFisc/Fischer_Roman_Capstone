@@ -1,13 +1,13 @@
 import React from 'react';
-import TagList from '../../../client1/src/components/TagList';
+import TagList from '../components/TagList';
 
-function Tags() {
+const Tags = () => {
   return (
     <div>
       <h1>Tags</h1>
       <TagList />
     </div>
   );
-}
+};
 
 export default Tags;

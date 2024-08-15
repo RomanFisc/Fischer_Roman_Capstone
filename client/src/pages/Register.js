@@ -1,13 +1,18 @@
 import React from 'react';
-import AuthForm from '../../../client1/src/components/AuthForm';
+import AuthForm from '../components/AuthForm';
 
-function Register() {
+const Register = () => {
+  const handleAuthSuccess = (data) => {
+    // Handle registration success (e.g., store token, redirect, etc.)
+    console.log('Registration successful:', data);
+  };
+
   return (
     <div>
       <h1>Register</h1>
-      <AuthForm mode="register" />
+      <AuthForm isLogin={false} onAuthSuccess={handleAuthSuccess} />
     </div>
   );
-}
+};
 
 export default Register;

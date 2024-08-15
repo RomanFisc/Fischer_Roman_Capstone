@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { getCategories, deleteCategory } from '../api/categoriesApi';
+import axios from 'axios';
 
-function CategoryList() {
+const CategoryList = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    loadCategories();
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('/api/categories');
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
   }, []);
-
-  const loadCategories = async () => {
-    const response = await getCategories();
-    setCategories(response.data);
-  };
-
-  const handleDelete = async (id) => {
-    await deleteCategory(id);
-    loadCategories();
-  };
 
   return (
     <ul>
-      {categories.map(category => (
-        <li key={category._id}>
-          {category.name}
-          <button onClick={() => handleDelete(category._id)}>Delete</button>
-        </li>
+      {categories.map((category) => (
+        <li key={category._id}>{category.name}</li>
       ))}
     </ul>
   );
-}
+};
 
 export default CategoryList;

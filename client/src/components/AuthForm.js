@@ -1,40 +1,40 @@
 import React, { useState } from 'react';
-import { login, register } from '../api/authApi';
+import axios from 'axios';
 
-function AuthForm({ mode }) {
-  const [username, setUsername] = useState('');
+const AuthForm = ({ isLogin, onAuthSuccess }) => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (mode === 'login') {
-      await login({ username, password });
-    } else {
-      await register({ username, password });
+    try {
+      const url = isLogin ? '/api/auth/login' : '/api/auth/register';
+      const response = await axios.post(url, { email, password });
+      onAuthSuccess(response.data);
+    } catch (error) {
+      console.error('Authentication error:', error);
     }
-    setUsername('');
-    setPassword('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-        required
+      <input 
+        type="email" 
+        placeholder="Email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        required 
       />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
+      <input 
+        type="password" 
+        placeholder="Password" 
+        value={password} 
+        onChange={(e) => setPassword(e.target.value)} 
+        required 
       />
-      <button type="submit">{mode === 'login' ? 'Login' : 'Register'}</button>
+      <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
     </form>
   );
-}
+};
 
 export default AuthForm;

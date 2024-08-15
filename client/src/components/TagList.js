@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { getTags, deleteTag } from '../api/tagsApi';
+import axios from 'axios';
 
-function TagList() {
+const TagList = () => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    loadTags();
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get('/api/tags');
+        setTags(response.data);
+      } catch (error) {
+        console.error('Error fetching tags:', error);
+      }
+    };
+    fetchTags();
   }, []);
-
-  const loadTags = async () => {
-    const response = await getTags();
-    setTags(response.data);
-  };
-
-  const handleDelete = async (id) => {
-    await deleteTag(id);
-    loadTags();
-  };
 
   return (
     <ul>
-      {tags.map(tag => (
-        <li key={tag._id}>
-          {tag.name}
-          <button onClick={() => handleDelete(tag._id)}>Delete</button>
-        </li>
+      {tags.map((tag) => (
+        <li key={tag._id}>{tag.name}</li>
       ))}
     </ul>
   );
-}
+};
 
 export default TagList;

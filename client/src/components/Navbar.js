@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="navbar">
+      <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/tasks">Tasks</Link></li>
         <li><Link to="/categories">Categories</Link></li>
         <li><Link to="/tags">Tags</Link></li>
+        <li><Link to="/tasks">Tasks</Link></li>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/register">Register</Link></li>
       </ul>
     </nav>
   );
-}
+};
 
 export default Navbar;
